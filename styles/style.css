@@ -223,15 +223,26 @@ main{
 .productContainer{
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  margin-top:100px;
+  margin-top:20px;
 }
-.nombreProducto, .precioProducto ,.colorProducto{
+.nombreProducto, .precioProducto ,.colorProducto,.comprar{
   padding: 15px 0;
  /* background-color: #F2F6FA;*/
  background-color: #2c3e50;
  color:#F2F6FA;
   width: 100%;
   font-family: sans-serif;
+}
+.comprar button{
+  width: 120px;
+  height: 45px;
+  background-color: black;
+  color:#fff;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+.comprar button:hover{
+  cursor:pointer;
 }
 .producto:hover{
   background-color: #F2F6FA;
@@ -255,7 +266,11 @@ main{
 .contenedorSucursales{
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  margin-top: 140px;
+ /* margin-top: 140px;*/
+  
+}
+.tituloSuc{
+  margin-top: 150px;
 }
 .mapa iframe{
   width: 270px;
@@ -269,6 +284,7 @@ main{
   padding: 10px;
   background-color: #333;
   border-radius: 5px;
+  
 }
 .mapaDetalle{
   
@@ -341,7 +357,7 @@ nav .logo{
   .contenedorSucursales{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    margin-top: 140px;
+    margin-top: 40px;
   }
 }
 @media (max-width: 958px){
@@ -403,8 +419,9 @@ nav .logo{
 .contenedorSucursales{
   display: grid;
   grid-template-columns: repeat(2,1fr);
-  margin-top: 140px;
+  margin-top: 20px;
 }
+
 
 
 }
@@ -413,7 +430,7 @@ nav .logo{
   .productContainer{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    margin-top:100px;
+    margin-top:20px;
   }
   
 }
@@ -421,7 +438,7 @@ nav .logo{
   .productContainer{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    margin-top:100px;
+    margin-top:20px;
   }
   /*slide inicio*/
   .prueba2 img{
@@ -435,19 +452,41 @@ nav .logo{
   
   }
 }
+
 @media (max-width:630px){
   .contenedorSucursales{
     display: grid;
     grid-template-columns: repeat(1,1fr);
-    margin-top:100px;
+    margin-top:20px;
   }
 }
+
 @media (max-width: 580px){
   .productContainer{
     display: grid;
     grid-template-columns: repeat(1,1fr);
-    margin-top:100px;
+    margin-top:20px;
   }
+  .prueba2{
+    width: 540px;
+    height: auto;
+    margin:auto;
+  }
+  .prueba{
+    width: 540px;
+    height: auto;
+  
+  }
+  .prueba img{
+    width: 530px;
+    height: auto;
+  
+  }
+  .contenedor{
+    margin-top: 120px;
+  }
+
+}
   @media (max-width:899px){
     .contenedorNos img{
       width: 100%;
@@ -498,12 +537,49 @@ nav .logo{
   width: 400px;
   margin:auto;
  }
+ .contenedorSucursales{
+  margin-top: 20px;
+ }
 }
 
-.carousel-control-prev-icon{
-  color:#333 !important;
-  font-size: 50px;
+
+/*galaxy fold*/
+@media (max-width:280px){
+
+.sucursal{
+  margin:20px;
+  border: 1px solid #333;
+  text-align: center;
+  background-color: #333;
+  border-radius: 5px;
+  max-width: 250px;
+  overflow: hidden;
 }
-.carousel-control-prev-icon:hover{
-  background-color:black;
+.producto {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #2c3e50;
+  margin: 10px;
+  border-radius: 5px;
+}
+.prueba2{
+  width: 240px;
+  height: auto;
+  margin:auto;
+}
+.prueba{
+  width: 240px;
+  height: auto;
+
+}
+.prueba img{
+  width: 230px;
+  height: auto;
+
+}
+.contenedor{
+  margin-top: 120px;
+}
 }
