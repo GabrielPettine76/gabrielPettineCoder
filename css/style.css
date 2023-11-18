@@ -350,7 +350,7 @@ li a.active, li a:hover {
 }
 
 .mesage h4 {
-  font-size: 30px !important;
+  font-size: 30px;
 }
 
 @media (max-width: 1300px) {
@@ -362,6 +362,18 @@ li a.active, li a:hover {
   .linea {
     border: 1px solid white;
     margin: 0 15px;
+  }
+  .contenedorContacto {
+    min-height: 75vh;
+  }
+  .contenedorContacto p {
+    font-size: 1.2rem;
+  }
+  .contenedorNos {
+    min-height: 75vh;
+  }
+  .contenedorNos p {
+    font-size: 1.2rem;
   }
 }
 @media (max-width: 958px) {
@@ -418,11 +430,22 @@ li a.active, li a:hover {
     margin: 0 15px;
   }
 }
+@media (max-width: 958px) {
+  .linea {
+    border: 1.5px solid white;
+    width: 800px;
+    margin: 0 15px;
+  }
+}
 @media (max-width: 899px) {
   .productContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-top: 20px;
+  }
+  .linea {
+    border: 1px solid white;
+    margin: 0 15px;
   }
   /*slide inicio*/
   .prueba2 img {
