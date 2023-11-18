@@ -354,6 +354,11 @@ li a.active, li a:hover {
 }
 
 @media (max-width: 1300px) {
+  .productContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 40px;
+  }
   .contenedorSucursales {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
