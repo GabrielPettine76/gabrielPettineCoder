@@ -29,6 +29,15 @@
       font-size: 1.2rem;
     }
   }
+  .imagenArticulo{
+    grid-column: 1/4;
+    margin:15px;
+  }
+  .textoPrincipal{
+    grid-column: 1/4;
+    margin: 15px;
+    
+  }
 }
 //menu responsive y footer
 @media (max-width: 958px){
@@ -156,6 +165,11 @@
   .linea{
     width: 90%;
   }
+  .contenedorNos img{
+    width: 300px;
+    height: 300px;
+    
+  }
 }
 
 @media (max-width: 580px){
@@ -234,6 +248,21 @@
     max-width: 250px;
     overflow: hidden;
   }
+  .contenedorNos {
+    max-width: 280px;
+    grid-template-columns: repeat(1,1fr);
+    img{
+    width: 230px;
+    height: 230px;
+  }
+  h1{
+    text-align: center;
+    grid-column: 1/3;
+  }
+}
+  .contenidoNos1{
+    width: 250px;
+  }
   .producto {
     display: flex;
     flex-direction: column;
@@ -260,6 +289,11 @@
   
   .contenedor{
     margin-top: 120px;
+  }
+  .contenedorContacto{
+    h1{
+        font-size: 1.8rem;
+    }
   }
   
   }
