@@ -182,6 +182,7 @@ main {
 
 //footer
 footer{
+  
   background-color: $color_1;
   color:$color_2;
   display: grid;
@@ -270,7 +271,7 @@ header{
 
 li a.active, li a:hover{
   background: $color_promo;
-  transition: .5s;
+  transition: 1s ease 0s;
 }
 .checkBtn{
   font-size: 30px;
@@ -290,6 +291,7 @@ li a.active, li a:hover{
   display: grid;
   grid-template-columns: repeat(2,1fr);
   img{
+    
     width: $ancho*0.9;
     height: $ancho*0.9;
     object-fit: cover;
@@ -298,14 +300,39 @@ li a.active, li a:hover{
     grid-column: 1/2;
     
   }
+ 
   h1{
     grid-column: 1/3;
     width: $ancho;
     color:$color_promo;
   }
+  p{
+    color:$color_promo;
+  }
 } 
+.imagenBic{
+  background-image: url(../images/biciAntigua.jpg);
+  background-position: center;
+  background-size: cover;
+  margin:25px;
+  animation: galeria 18s  infinite;
 
+}
+@keyframes galeria {
+  0%, 100%{
+    background-image: url(../images/biciAntigua.jpg);
+  }
+  25%{
+    background-image: url(../images/images.jpg);
+  }
+  50%{
+    background-image: url(../images/familia.png);
 
+  }
+  75%{
+    background-image: url(../images/niba2.jpg);
+  }
+}
 
 .contenidoNos1{
   grid-column: 2/3;
@@ -351,13 +378,13 @@ li a.active, li a:hover{
 }
 .textoPrincipal p{
   font-size: 22px;
-  margin:10px ;
+  margin:20px ;
   color:$color_promo;
 }
 .mesage{
   grid-column: 1/4;
   min-height: 100px;
-  background-color: $color_promo;
+  background-image:linear-gradient(to top ,$color_promo, $color_1);
   color:$color_2;
   text-align: center;
   box-shadow: 5px 5px 5px $color_promo;
