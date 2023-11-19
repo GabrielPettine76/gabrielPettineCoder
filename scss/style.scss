@@ -39,6 +39,7 @@ h1{
 		background-color: $color_3;
 		border: 3px solid $color_1;
 		cursor: pointer;
+    transition: 1s ease 0s;
 	}
 }
 .productContainer {
@@ -107,7 +108,8 @@ h1{
 	&:hover {
 		background-color: $color_3;
 		color: $color_4;
-		border: 1px solid $color_promo;
+		border: 2px solid $color_promo;
+    transition: 1.5s ease 0s;
 		.mapaDetalle{
     color: $color_4;
 	}
@@ -158,6 +160,7 @@ h1{
 	border: none;
 	border: 1px solid $color_contacto;
 	border-radius: 5px;
+  opacity: 0.9;
 }
 .contenedorContacto {
 	margin-bottom: 30px;
@@ -353,15 +356,16 @@ li a.active, li a:hover{
 }
 .mesage{
   grid-column: 1/4;
-  height: 100px;
+  min-height: 100px;
   background-color: $color_promo;
   color:$color_2;
   text-align: center;
   box-shadow: 5px 5px 5px $color_promo;
+  
 }
 .mesage h4{
   font-size: 30px;
-  
+  margin-top: 20px
 }
 
 @import './partials/queries';

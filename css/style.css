@@ -39,6 +39,7 @@ h1 {
   background-color: #F2F6FA;
   border: 3px solid black;
   cursor: pointer;
+  transition: 1s ease 0s;
 }
 
 .productContainer {
@@ -106,7 +107,8 @@ h1 {
 .sucursal:hover {
   background-color: #F2F6FA;
   color: #333;
-  border: 1px solid #063665;
+  border: 2px solid #063665;
+  transition: 1.5s ease 0s;
 }
 .sucursal:hover .mapaDetalle {
   color: #333;
@@ -157,6 +159,7 @@ h1 {
   border: none;
   border: 1px solid rgb(6, 53, 68);
   border-radius: 5px;
+  opacity: 0.9;
 }
 
 .contenedorContacto {
@@ -351,7 +354,7 @@ li a.active, li a:hover {
 
 .mesage {
   grid-column: 1/4;
-  height: 100px;
+  min-height: 100px;
   background-color: #063665;
   color: white;
   text-align: center;
@@ -360,6 +363,7 @@ li a.active, li a:hover {
 
 .mesage h4 {
   font-size: 30px;
+  margin-top: 20px;
 }
 
 @media (max-width: 1300px) {
@@ -623,6 +627,9 @@ li a.active, li a:hover {
   .prueba img {
     width: 230px;
     height: auto;
+  }
+  .prueba .mesage {
+    height: 150px !important;
   }
   .contenedor {
     margin-top: 120px;
