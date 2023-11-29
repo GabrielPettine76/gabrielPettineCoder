@@ -290,6 +290,43 @@ li a.active, li a:hover {
   display: none;
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 3rem;
+}
+.error h1 {
+  color: red;
+}
+.error h4 {
+  text-align: center;
+  color: red;
+}
+
+.botonInicio {
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+}
+.botonInicio a {
+  text-decoration: none;
+  color: white;
+}
+.botonInicio button {
+  background-color: rgb(46, 172, 46);
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 40px;
+}
+.botonInicio button:hover {
+  background-color: #2e5174;
+}
+
 .contenedorNos {
   margin-top: 150px;
   display: grid;

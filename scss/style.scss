@@ -292,6 +292,44 @@ li a.active, li a:hover{
 #checkBtn{
   display: none;
 }
+//error
+.error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:red;
+  font-size: 3rem;
+  h1{
+    color:red;
+  }
+  h4{
+    text-align: center;
+    color:red;
+  }
+}
+.botonInicio{
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+  color:$color_2;
+  a{
+    text-decoration: none;
+    color:$color_2;
+  }
+  button{
+    background-color:$color_green;
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 40px;
+    &:hover{
+      background-color: $color_contac_hover;
+    }
+
+  }
+}
+
 //nosotros
 .contenedorNos{
   margin-top:150px;
