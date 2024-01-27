@@ -28,6 +28,9 @@ h1 {
 .promo h3 {
   font-size: 1.2rem;
 }
+.promo i {
+  font-size: 30px;
+}
 
 .producto {
   display: flex;
@@ -83,6 +86,68 @@ h1 {
 .productoImagen img {
   width: 259px;
   height: 194px;
+}
+
+.carrito {
+  margin: 10px;
+  text-align: center;
+}
+
+.tituloCarrito {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 5px 0;
+}
+.tituloCarrito h4 {
+  border: 1px solid #063665;
+  padding: 5px 0;
+}
+
+.contCarrito {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.carritoEnProducto {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid #063665;
+  padding: 5px 0;
+}
+.carritoEnProducto h4 {
+  padding: 5px 0;
+}
+.carritoEnProducto button {
+  width: 22px;
+  height: 22px;
+  margin: 0 auto;
+  font-size: 18px;
+  color: white;
+  background-color: red;
+  border: none;
+}
+.carritoEnProducto button:hover {
+  background-color: rgb(150, 39, 39);
+  cursor: pointer;
+}
+
+#vaciar {
+  width: 120px;
+  height: 45px;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+#vaciar:hover {
+  cursor: pointer;
+  background-color: #2e5174;
+}
+
+.contenedorCarrito {
+  z-index: 100;
+  padding-top: 15rem;
 }
 
 .contenedorSucursales {

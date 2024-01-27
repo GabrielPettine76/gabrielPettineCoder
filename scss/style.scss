@@ -26,7 +26,9 @@ h1{
   h3{
     font-size: 1.2rem;
   }
-
+  i{
+    font-size: 30px;
+  }
   
 }
 //productos escritorio
@@ -85,6 +87,68 @@ h1{
 		width: 259px;
 		height: 194px;
 	}
+}
+.carrito{
+ margin:10px;
+  text-align: center;
+}
+.tituloCarrito {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  
+  padding: 5px 0;
+  h4{
+    border: 1px solid $color_promo;
+    padding: 5px 0;
+  }
+}
+.contCarrito{
+  text-align: center;
+  font-size: 1.2rem;
+}
+.carritoEnProducto{
+  
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border:1px solid $color_promo;
+    padding: 5px 0;
+    h4{
+      
+      padding: 5px 0;
+    }
+    button{
+      width: 22px;
+      height: 22px;
+      margin: 0 auto;
+      font-size: 18px;
+      color:white;
+      background-color: red;
+      border: none;
+      
+      &:hover{
+        background-color: rgb(150, 39, 39);
+        cursor: pointer;
+        
+      }
+    }
+}
+#vaciar{
+  width: 120px;
+		height: 45px;
+		background-color: $color_1;
+		color: $color_2;
+		border-radius: 5px;
+		font-size: 1.2rem;
+    margin-top: 10px;
+		&:hover {
+			cursor: pointer;
+      background-color: $color_contac_hover;
+		}
+}
+//carrito 
+.contenedorCarrito{
+  z-index: 100;
+  padding-top: 15rem;
 }
 //sucursales
 
