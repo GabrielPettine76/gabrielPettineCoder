@@ -7,14 +7,14 @@ const contenedor = document.querySelector('.productContainer');
 const carritoCompra= document.querySelector('.carrito');
 const totalCarrito = document.querySelector('.total');
 const contenedorCarrito = document.querySelector('.contenedorCarrito');
-let listaCarrito=[];
+let listaCarrito=JSON.parse(localStorage.getItem('productos')) || [];
 
 
 
 
 const productos = [
     {
-        id:1,
+        id:0,
         imagen:"./images/descarga.jpg",
         nombre:'Giant XTC',
         Precio:1500000,
@@ -24,7 +24,7 @@ const productos = [
 
     },
     {
-        id:2,
+        id:1,
         imagen:"./images/Calea.jpg",
         nombre:' Zenith Calea',
         Precio:1000000,
@@ -34,7 +34,7 @@ const productos = [
 
     },
     {
-        id:3,
+        id:2,
         imagen:"./images/topMega.jpg",
         nombre:'Top Mega Armor',
         Precio: 500000,
@@ -44,7 +44,7 @@ const productos = [
 
     },
     {
-        id:4,
+        id:3,
         imagen:"./images/scott.jpg",
         nombre:'Scott Scale 970',
         Precio: 2500000,
@@ -54,7 +54,7 @@ const productos = [
 
     },
     {
-        id:5,
+        id:4,
         imagen:"./images/trek.jpg",
         nombre:'Treck Madone',
         Precio: 4500000,
@@ -64,7 +64,7 @@ const productos = [
 
     },
     {
-        id:6,
+        id:5,
         imagen:"./images/bianchi.jpg",
         nombre:'Bianchi Oltre xr4',
         Precio: 4000000,
@@ -74,7 +74,7 @@ const productos = [
 
     },
     {
-        id:7,
+        id:6,
         imagen:"./images/volta.jpg",
         nombre:'Volta Viggo',
         Precio: 800000,
@@ -84,12 +84,22 @@ const productos = [
 
     },
     {
-        id:8,
+        id:7,
         imagen:"./images/specializad.jpg",
         nombre:'Specializad Tarmac',
         Precio: 4800000,
         color: "#ffffff",
         rodado:29,
+        talle:[50,52,54,56,58]
+
+    },
+    {
+        id:8,
+        imagen:"./images/casco.png",
+        nombre:'Casco Ruta',
+        Precio: 48000,
+        color: "#ffffff",
+        rodado:0,
         talle:[50,52,54,56,58]
 
     },
@@ -138,9 +148,15 @@ class producto {
     addProducto(id1,nombre1, precio1, talle1, rodado1,color1,imagen1){
         
         console.log(id1,nombre1,precio1,talle1,rodado1,color1,imagen1);
-        const indice = listaCarrito.findIndex(productos => productos.id == id1);
-        
-        console.log(indice);
+        let indice;
+        if(!listaCarrito){
+        indice =-1;
+        }
+        else{
+            indice =listaCarrito.findIndex(productos => productos.id == id1);
+        console.log(indice)
+        }
+       
         if(indice==-1){
         let objeto ={
             id:parseInt(id1),
@@ -158,27 +174,27 @@ class producto {
         }
         else{
             listaCarrito[indice].cant++;
-            console.log(listaCarrito[indice]);
+            
+            
         }
+       
         this.guardarLocal(listaCarrito);
         this.getListarCarrito();
         this.getPonerTotal();
     }
 
     getPonerTotal(){
-        let total=this.getSumatorria();
-        console.log(total);
+        let total=this.getSumatorria2();
+       
         totalCarrito.innerHTML=`Total=$ ${total}`;
     };
     getCantidadCarrito(){
         return listaCarrito.length;
     };
-    getSumatorria(){
-        let suma = 0;
-        listaCarrito.forEach(e => {
-            suma+=e.precio
-        });
-        return suma;
+
+    getSumatorria2(){
+        return listaCarrito.reduce(  (acum, product) => 
+        {  return acum + (product.cant * product.precio)  }, 0  )
     };
 
     guardarLocal =(lista)=>{localStorage.setItem('productos',JSON.stringify(lista))};
@@ -187,6 +203,7 @@ class producto {
          listaCarrito =JSON.parse(localStorage.getItem('productos')
 
         )
+        return listaCarrito;
     };
     
     vaciarLocal = ()=> localStorage.clear();
@@ -195,7 +212,7 @@ class producto {
         carritoCompra.innerHTML=`
         
         <div class="tituloCarrito">
-            <h4>Nombre</h4><h4>Cantidad</h4><h4>Precio Unitario</h4><h4>Eliminar</h4>
+            <h4>Nombre</h4><h4>Cantidad</h4><h4>Precio Unitario</h4><h4>Precio total</h4>
             </div>
         `;
         listaCarrito.forEach(element => {
@@ -205,21 +222,18 @@ class producto {
             `
            
             <div class="carritoEnProducto" }>
-                       
-                        
-                            <h4>${element.nombre}</h4>
-                            
-                            <h4>${element.cant}</h4>
-                            <h4>$${element.precio}</h4>
-                            
-                            <button class='btn1' id=${element.id}>X</button>
+                <h4>${element.nombre}
+                <button class='btn1' id=${element.id}><i class='bx bxs-trash'></i></button></h4>
+                <h4>${element.cant}</h4>
+                <h4>$${element.precio}</h4>
+                <h4>$${element.precio*element.cant}</h4>
+                
 
-                        
-            </div>
-            
-            `; 
+            </div>`; 
             });  
             this.getPonerTotal();
+            this.eleminarProductoCarrito();
+           
             
         };
         vaciarCarritoCompras(){
@@ -236,20 +250,19 @@ class producto {
             botonesEliminar.forEach((btn)=>{
                 console.log(btn);
                 btn.addEventListener('click',function(){
-                const idProducto = btn.id;
-                listaCarrito.splice(idProducto-1, 1);
-                let posicion = listaCarrito[btn.id-1];
-                console.log(posicion);
+                const idProducto = parseInt(btn.id);
                 console.log(parseInt(idProducto));
-                localStorage.removeItem(parseInt(idProducto)-1);
-                localStorage.setItem('porductos', JSON.stringify(listaCarrito));
-                //carrito.listaProductos = carrito.listaProductos.filter(productos => productos.id !== idProducto);
+                localStorage.clear();
+                listaCarrito = listaCarrito.filter(productos => productos.id !== idProducto);
+                localStorage.setItem('productos', JSON.stringify(listaCarrito));
+                
+                location.reload();
+                
+                
+               });
                
                 
-                
             });
-            });
-
             
         };
     agregarAlCarrito(){
@@ -262,107 +275,23 @@ class producto {
             this.getProductos(btn.id).rodado,this.getProductos(btn.id).color,this.getProductos(btn.id).imagen);
             
         })
+        
     });
     
-    
 
 }
 }
 
-/*const carrito = {
-    listaProductos:[],
-    getSumatorria(){
-        let suma = 0;
-        this.listaProductos.forEach(e => {
-            suma+=e.precio
-        });
-        return suma;
-    },
-    getCantidadCarrito(){
-        return this.listaProductos.length;
-   },
-   getCarrito(){
-    return this.listaProductos;
-},
 
-getPonerTotal(){
-    let total=carrito.getSumatorria();
-    console.log(total);
-    totalCarrito.innerHTML=`Total=$ ${total}`;
-},
-   getListarCarrito(){
-        
-        carritoCompra.innerHTML=`
-        
-        <div class="tituloCarrito">
-            <h4>Nombre</h4><h4>Precio</h4><h4>Eliminar</h4>
-            </div>
-        `;
-        this.listaProductos.forEach(element => {
-            
-            
-            carritoCompra.innerHTML +=
-            `
-           
-            <div class="carritoEnProducto" }>
-                       
-                        
-                            <h4>${element.nombre}</h4>
-                            <h4>$${element.precio}</h4>
-                            <button class='btn1' id=${element.id}>X</button>
-                        
-                        
-            </div>
-            
-            `; 
-            });  
-            this.getPonerTotal();
-            this.vaciarCarritoCompras();
-            this.eleminarProductoCarrito();
-        }, 
-        eleminarProductoCarrito(){
-            const botonesEliminar = document.querySelectorAll('.btn1');
-           
-            botonesEliminar.forEach((btn)=>{
-                
-                btn.addEventListener('click',function(){
-                const idProducto = btn.id;
-                carrito.listaProductos.splice(idProducto, 1);
-                console.log(idProducto);
-                console.log(parseInt(idProducto)+1);
-                localStorage.removeItem(parseInt(idProducto)+1);
-                //localStorage.setItem(carrito.listaProductos, JSON.stringify(arrayEnLocalStorage));
-                //carrito.listaProductos = carrito.listaProductos.filter(productos => productos.id !== idProducto);
-                carrito.getListarCarrito();
-                
-                
-            });
-            });
-
-            
-        },
-        vaciarCarritoCompras(){
-            const vaciarCarrito = document.querySelector('#vaciar');
-            vaciarCarrito.addEventListener('click', ()=>{
-                this.listaProductos=[];
-                localStorage.clear();
-                this.getListarCarrito();
-            });
-        },
-    };
-*/
 const lista = new producto;
 lista.getListarProductos();
 lista.agregarAlCarrito();
 lista.recuperarDatos();
 if(listaCarrito){
     lista.getListarCarrito();
+    
 }
 lista.vaciarCarritoCompras();
-lista.eleminarProductoCarrito();
-
-//carrito.getSumatorria();
-//carrito.eleminarProductoCarrito();
 
 
 

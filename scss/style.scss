@@ -119,14 +119,15 @@ h1{
     button{
       width: 22px;
       height: 22px;
-      margin: 0 auto;
+      margin-left:5px;
       font-size: 18px;
-      color:white;
-      background-color: red;
+      color:red;
+      
       border: none;
       
       &:hover{
-        background-color: rgb(150, 39, 39);
+        background-color: red;
+        color:white;
         cursor: pointer;
         
       }
