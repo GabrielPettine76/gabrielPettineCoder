@@ -52,7 +52,7 @@ h1{
 	grid-template-columns: repeat(4,1fr);
 	margin-top: 20px;
 }
-.nombreProducto, .precioProducto ,.colorProducto, .comprar {
+.nombreProducto, .precioProducto ,.colorProducto, .comprar, .talleProducto {
 	padding: 15px 0;
 	background-color: $color_promo;
 	color: $color_3;
@@ -81,6 +81,23 @@ h1{
 		border-radius: 5px;
 		background-color: $color_promo;
 	}
+}
+.talleProducto{
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  select{
+    
+    width:200px;
+    font-size: 1.2rem;
+    margin-left: 10px;
+    background-color: #f2f2f2;
+    color: #333;
+    text-align: center;
+    border: 3px solid #333;
+    border-radius: 5px;
+  }
+  
 }
 .productoImagen {
 	img {
@@ -130,8 +147,20 @@ h1{
         color:white;
         cursor: pointer;
         
+        
       }
     }
+}
+.buscarCarrito{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  input{
+    font-size: 1.1rem;
+    color:red;
+    height: 35px;
+    border: 2px solid black;
+  }
 }
 #vaciar{
   width: 120px;

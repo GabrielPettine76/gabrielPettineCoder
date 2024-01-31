@@ -54,7 +54,7 @@ h1 {
   margin-top: 20px;
 }
 
-.nombreProducto, .precioProducto, .colorProducto, .comprar {
+.nombreProducto, .precioProducto, .colorProducto, .comprar, .talleProducto {
   padding: 15px 0;
   background-color: #063665;
   color: #F2F6FA;
@@ -81,6 +81,22 @@ h1 {
   height: 45px;
   border-radius: 5px;
   background-color: #063665;
+}
+
+.talleProducto {
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+}
+.talleProducto select {
+  width: 200px;
+  font-size: 1.2rem;
+  margin-left: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: center;
+  border: 3px solid #333;
+  border-radius: 5px;
 }
 
 .productoImagen img {
@@ -129,6 +145,18 @@ h1 {
   background-color: red;
   color: white;
   cursor: pointer;
+}
+
+.buscarCarrito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buscarCarrito input {
+  font-size: 1.1rem;
+  color: red;
+  height: 35px;
+  border: 2px solid black;
 }
 
 #vaciar {

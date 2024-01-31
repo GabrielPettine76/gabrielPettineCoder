@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,27 +12,37 @@
 
     <link rel="shortcut icon" href="images/biciLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Bikes-Productos</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="./js/productos.js" defer></script>
+
 </head>
+
 <body>
     <header>
         <div class="promo">
-            <h3>Descuento 10% en efectivo</h3>
+            <h3>Descuento 10% en efectivo <i class='bx bx-cart'></i><p id="cantCarrito"></p></h3>
         </div>
         <nav>
             <input type="checkbox" id="checkBtn">
             <label class="checkBtn" for="checkBtn">
-            <i class='bx bx-menu'></i>
+                <i class='bx bx-menu'></i>
             </label>
-                <img src="./images/biciLogo.png" alt="logo" class="logo">
-                 <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="nosotros.html">Nosotros</a></li>
-                        <li><a href="productos.html">Productos</a></li>
-                        <li><a href="sucursales.html">Sucursales</a></li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                </ul>
+            <img src="./images/biciLogo.png" alt="logo" class="logo">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="sucursales.html">Sucursales</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
         </nav>
     </header>
     <main>
@@ -40,24 +51,27 @@
         </div>
         <div class="contCarrito">
             <div class="TituloCar">Carrito de Compras</div>
-            <div class="carrito">
-                
+                <div class="carrito">
+
+                </div>
+                <div class="total">Total: $0</div>
+                <p><button id='vaciar'>Vaciar</button></p>
             </div>
-            <div class="total">Total: $0</div>
-            <p><button id='vaciar'>Vaciar</button></p>
-        </div>
+            <div class="buscarCarrito">
+                <input id="buscar" placeholder="Buscar tu producto">
+            </div>
         </div>
         <div class="productContainer">
-            
+
         </div>
 
-        
-        
+
+
     </main>
     <footer>
         <div class="logo"><img src="./images/biciLogo.png" alt="logo"></div>
         <div class="redes">
-            <a href="#"><i class='bx bxl-whatsapp' ></i>
+            <a href="#"><i class='bx bxl-whatsapp'></i>
             </a>
             <a href="#"><i class='bx bxl-instagram'></i>
             </a>
@@ -70,8 +84,10 @@
             <h4>Contacto@contaco.com.ar</h4>
         </div>
         <div class="linea"></div>
-        <div class="copiright">2023 copiright <a href="https://gabrielpettine76.github.io/4gstudio/index.html#" target="_blank">4gstudio</a></div>
+        <div class="copiright">2023 copiright <a href="https://gabrielpettine76.github.io/4gstudio/index.html#"
+                target="_blank">4gstudio</a></div>
     </footer>
-    <script src="./js/productos.js"></script>
+
 </body>
+
 </html>

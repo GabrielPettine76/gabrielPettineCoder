@@ -1,3 +1,4 @@
+
 const id = document.querySelector('#id');
 const imagen = document.querySelector('img');
 const nombre = document.querySelector('h3');
@@ -6,8 +7,12 @@ const color = document.querySelector('#color');
 const contenedor = document.querySelector('.productContainer');
 const carritoCompra= document.querySelector('.carrito');
 const totalCarrito = document.querySelector('.total');
+const cantidadCarrito = document.querySelector('i');
 const contenedorCarrito = document.querySelector('.contenedorCarrito');
+const buscarEnElCarrito = document.querySelector('#buscar');
 let listaCarrito=JSON.parse(localStorage.getItem('productos')) || [];
+let guardarTalle='';
+
 
 
 
@@ -115,10 +120,20 @@ class producto {
         this.productos = productos;
         
     }
-    
-    getListarProductos(){
-       
-        productos.forEach( producto =>{
+    buscar() {
+        buscarEnElCarrito.addEventListener('input', (e) => {
+            const buscarInput = e.target.value;
+            console.log(buscarInput);
+            const nuevaLista = productos.filter((productos) => productos.nombre.toLowerCase().includes(buscarInput.toLowerCase()));
+            console.log(nuevaLista);
+             this.getListarProductos(nuevaLista);
+            this.cargarTalles(nuevaLista);
+        });
+    }
+
+    getListarProductos(product){
+        contenedor.innerHTML='';
+        product.forEach( producto =>{
             
             contenedor.innerHTML +=
             `
@@ -132,29 +147,73 @@ class producto {
                         <div class="precioProducto">
                             <h4>$${producto.Precio}</h4>
                         </div>
+                        <div class="talleProducto">
+                        
+                         <select class="talles${producto.id}" required></select>
+                        </div>
                         <div class="colorProducto">
                             <input type="color"id="color" value="${producto.color}" disabled>
                         </div>
                         <div class="comprar"><button class='btn' id=${producto.id}>Agregar</button></div>
              </div>`;
         });
+        this.seleccionarTalles();
+        this.agregarAlCarrito();
     } 
+
+    cargarTalles(productos) {
+        console.log(productos);
+        for (let i in productos) {
+            let clase = '.talles';
+            clase = clase + productos[i].id;
+            console.log(clase);
+            let select = document.querySelector(clase);
+            let opcionesHTML =  `<option value="" disable>Seleccione el Talle:</option>`;  // Inicializa opcionesHTML dentro del bucle exterior
+            
+            for (let j in productos[i].talle) {
+                opcionesHTML += `<option value="${productos[i].talle[j]}">${productos[i].talle[j]}</option>`;
+                console.log(opcionesHTML);
+            }
+            
+                select.innerHTML = opcionesHTML;
+            
+        }
+    }
+    
     getProductos(id){
        
         const buscar = productos.find( item => item.id == id);
         return buscar ? buscar : 'no existe el producto';
     }
-
+    
+        
+    seleccionarTalles = () => {
+        
+        const selects = document.querySelectorAll('select');
+        let talle3;
+        selects.forEach((select) => {
+            select.addEventListener('change', (e) => {
+                guardarTalle = e.target.value;
+                talle3=e.target.className;
+                console.log(guardarTalle);
+                
+            });
+            return talle3;
+        });
+    }    
     addProducto(id1,nombre1, precio1, talle1, rodado1,color1,imagen1){
         
         console.log(id1,nombre1,precio1,talle1,rodado1,color1,imagen1);
+
+        console.log(talle1);
+        if(talle1){
         let indice;
         if(!listaCarrito){
         indice =-1;
         }
         else{
             indice =listaCarrito.findIndex(productos => productos.id == id1);
-        console.log(indice)
+           
         }
        
         if(indice==-1){
@@ -164,7 +223,7 @@ class producto {
             nombre:nombre1,
             precio:precio1,
             color:color1,
-            talle:talle1,
+            talle:[talle1],
             rodado:rodado1,
             cant:1
         };
@@ -173,14 +232,21 @@ class producto {
         listaCarrito.push(objeto);
         }
         else{
-            listaCarrito[indice].cant++;
-            
-            
-        }
-       
+                listaCarrito[indice].cant++;
+                listaCarrito[indice].talle.push(guardarTalle);
+           }
         this.guardarLocal(listaCarrito);
         this.getListarCarrito();
         this.getPonerTotal();
+    }
+    else{
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo esta mal. No ingresaste El Talle!",
+            footer: '<a href="#">Tenes que seleccionar el talle?</a>'
+          });
+    }
     }
 
     getPonerTotal(){
@@ -188,8 +254,13 @@ class producto {
        
         totalCarrito.innerHTML=`Total=$ ${total}`;
     };
+
     getCantidadCarrito(){
-        return listaCarrito.length;
+        let suma=0;
+        for(let i in listaCarrito){
+            suma+=parseInt(listaCarrito[i].cant);
+        }
+        return suma;
     };
 
     getSumatorria2(){
@@ -206,9 +277,12 @@ class producto {
         return listaCarrito;
     };
     
+       
+    
     vaciarLocal = ()=> localStorage.clear();
     getListarCarrito(){
         
+        cantidadCarrito.innerHTML=this.getCantidadCarrito();
         carritoCompra.innerHTML=`
         
         <div class="tituloCarrito">
@@ -233,9 +307,10 @@ class producto {
             });  
             this.getPonerTotal();
             this.eleminarProductoCarrito();
-           
+            this.cargarTalles(productos);
             
         };
+
         vaciarCarritoCompras(){
             const vaciarCarrito = document.querySelector('#vaciar');
             vaciarCarrito.addEventListener('click', ()=>{
@@ -244,14 +319,15 @@ class producto {
                 this.getListarCarrito();
             });
         };
+
         eleminarProductoCarrito(){
             const botonesEliminar = document.querySelectorAll('.btn1');
             console.log(botonesEliminar);
             botonesEliminar.forEach((btn)=>{
-                console.log(btn);
+                
                 btn.addEventListener('click',function(){
                 const idProducto = parseInt(btn.id);
-                console.log(parseInt(idProducto));
+               
                 localStorage.clear();
                 listaCarrito = listaCarrito.filter(productos => productos.id !== idProducto);
                 localStorage.setItem('productos', JSON.stringify(listaCarrito));
@@ -265,34 +341,41 @@ class producto {
             });
             
         };
+        
     agregarAlCarrito(){
         const boton = document.querySelectorAll('.btn');      
-        let id2
+        let id2;
+        let talle1;
+        
         boton.forEach((btn) =>{
         btn.addEventListener('click',()=>{
             !listaCarrito ? id2= btn.id: id2= btn.id;
-            this.addProducto(id2,this.getProductos(btn.id).nombre,this.getProductos(btn.id).Precio,18,
+            talle1=this.seleccionarTalles(id2);
+            console.log(id2,talle1);
+            this.addProducto(id2,this.getProductos(btn.id).nombre,this.getProductos(btn.id).Precio,guardarTalle,
             this.getProductos(btn.id).rodado,this.getProductos(btn.id).color,this.getProductos(btn.id).imagen);
-            
+            guardarTalle=''
         })
-        
+       guardarTalle=''; 
     });
     
 
 }
+
 }
 
 
 const lista = new producto;
-lista.getListarProductos();
-lista.agregarAlCarrito();
+
+lista.getListarProductos(productos);
+lista.buscar();
 lista.recuperarDatos();
 if(listaCarrito){
     lista.getListarCarrito();
     
 }
 lista.vaciarCarritoCompras();
-
+lista.buscar();
 
 
 
