@@ -162,6 +162,21 @@ h1{
     border: 2px solid black;
   }
 }
+.ordenar{
+  margin:0 5px;
+  i{
+    padding: 0 10px;
+    font-size: 1.2rem;
+    color:white; 
+    background-color: $color_promo; 
+  }
+  &:hover{
+    cursor: pointer;
+    background-color: white;
+    color:$color_promo;
+  }
+  
+}
 #vaciar{
   width: 120px;
 		height: 45px;

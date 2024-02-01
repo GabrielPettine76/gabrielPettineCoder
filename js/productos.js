@@ -10,6 +10,8 @@ const totalCarrito = document.querySelector('.total');
 const cantidadCarrito = document.querySelector('i');
 const contenedorCarrito = document.querySelector('.contenedorCarrito');
 const buscarEnElCarrito = document.querySelector('#buscar');
+const ordernarMenor = document.querySelector('#ordenarMin');
+const ordenarMayor = document.querySelector('#ordenarMay');
 let listaCarrito=JSON.parse(localStorage.getItem('productos')) || [];
 let guardarTalle='';
 
@@ -130,6 +132,27 @@ class producto {
             this.cargarTalles(nuevaLista);
         });
     }
+    OrdenarPorPrecioMin(){
+        let nuevaLista;
+        ordernarMenor.addEventListener('click',()=>{
+            console.log(ordernarMenor);
+            console.log(productos.sort((x,y)=> x.Precio - y.Precio));
+            nuevaLista= productos.sort((x,y)=> x.Precio - y.Precio);
+            this.getListarProductos(nuevaLista);
+            this.cargarTalles(nuevaLista);
+        })
+      
+        
+     }
+     OrdenarPorPrecioMay(){
+            let nuevaLista;
+            ordenarMayor.addEventListener('click',()=>{
+            nuevaLista=productos.sort((x,y)=> y.Precio - x.Precio);
+            this.getListarProductos(nuevaLista);
+            this.cargarTalles(nuevaLista);
+        })
+        
+    }
 
     getListarProductos(product){
         contenedor.innerHTML='';
@@ -157,8 +180,10 @@ class producto {
                         <div class="comprar"><button class='btn' id=${producto.id}>Agregar</button></div>
              </div>`;
         });
-        this.seleccionarTalles();
+       
         this.agregarAlCarrito();
+        this.seleccionarTalles();
+        
     } 
 
     cargarTalles(productos) {
@@ -166,13 +191,13 @@ class producto {
         for (let i in productos) {
             let clase = '.talles';
             clase = clase + productos[i].id;
-            console.log(clase);
+            
             let select = document.querySelector(clase);
             let opcionesHTML =  `<option value="" disable>Seleccione el Talle:</option>`;  // Inicializa opcionesHTML dentro del bucle exterior
             
             for (let j in productos[i].talle) {
                 opcionesHTML += `<option value="${productos[i].talle[j]}">${productos[i].talle[j]}</option>`;
-                console.log(opcionesHTML);
+                
             }
             
                 select.innerHTML = opcionesHTML;
@@ -195,7 +220,7 @@ class producto {
             select.addEventListener('change', (e) => {
                 guardarTalle = e.target.value;
                 talle3=e.target.className;
-                console.log(guardarTalle);
+                
                 
             });
             return talle3;
@@ -205,7 +230,7 @@ class producto {
         
         console.log(id1,nombre1,precio1,talle1,rodado1,color1,imagen1);
 
-        console.log(talle1);
+        console.log(talle1,talle1.className);
         if(talle1){
         let indice;
         if(!listaCarrito){
@@ -233,7 +258,7 @@ class producto {
         }
         else{
                 listaCarrito[indice].cant++;
-                listaCarrito[indice].talle.push(guardarTalle);
+                listaCarrito[indice].talle.push(this.seleccionarTalles());
            }
         this.guardarLocal(listaCarrito);
         this.getListarCarrito();
@@ -277,6 +302,7 @@ class producto {
         return listaCarrito;
     };
     
+    
        
     
     vaciarLocal = ()=> localStorage.clear();
@@ -307,7 +333,7 @@ class producto {
             });  
             this.getPonerTotal();
             this.eleminarProductoCarrito();
-            this.cargarTalles(productos);
+            
             
         };
 
@@ -322,7 +348,7 @@ class producto {
 
         eleminarProductoCarrito(){
             const botonesEliminar = document.querySelectorAll('.btn1');
-            console.log(botonesEliminar);
+            
             botonesEliminar.forEach((btn)=>{
                 
                 btn.addEventListener('click',function(){
@@ -370,12 +396,17 @@ const lista = new producto;
 lista.getListarProductos(productos);
 lista.buscar();
 lista.recuperarDatos();
+lista.cargarTalles(productos);
+//lista.seleccionarTalles();
+
 if(listaCarrito){
     lista.getListarCarrito();
     
 }
 lista.vaciarCarritoCompras();
-lista.buscar();
+lista.OrdenarPorPrecioMin();
+lista.OrdenarPorPrecioMay();
+
 
 
 
