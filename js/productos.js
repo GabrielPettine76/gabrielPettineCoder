@@ -18,7 +18,7 @@ let guardarTalle='';
 
 
 
-
+//productos
 const productos = [
     {
         id:0,
@@ -122,6 +122,7 @@ class producto {
         this.productos = productos;
         
     }
+    //funcion Buscar Por ingreso de texto
     buscar() {
         buscarEnElCarrito.addEventListener('input', (e) => {
             const buscarInput = e.target.value;
@@ -132,6 +133,7 @@ class producto {
             this.cargarTalles(nuevaLista);
         });
     }
+    //ordenar la lista de productos de menor a mayor
     OrdenarPorPrecioMin(){
         let nuevaLista;
         ordernarMenor.addEventListener('click',()=>{
@@ -144,6 +146,7 @@ class producto {
       
         
      }
+     //ordenar la lista de productos de Mayor a Menor
      OrdenarPorPrecioMay(){
             let nuevaLista;
             ordenarMayor.addEventListener('click',()=>{
@@ -153,7 +156,7 @@ class producto {
         })
         
     }
-
+    //listar los productos que estan a la venta
     getListarProductos(product){
         contenedor.innerHTML='';
         product.forEach( producto =>{
@@ -185,7 +188,7 @@ class producto {
         this.seleccionarTalles();
         
     } 
-
+    //cargar los talles de los productos en los selects
     cargarTalles(productos) {
         console.log(productos);
         for (let i in productos) {
@@ -204,14 +207,14 @@ class producto {
             
         }
     }
-    
+    //Buscar un producto por id
     getProductos(id){
        
         const buscar = productos.find( item => item.id == id);
         return buscar ? buscar : 'no existe el producto';
     }
     
-        
+    //seleccion del select de talles    
     seleccionarTalles = () => {
         
         const selects = document.querySelectorAll('select');
@@ -226,6 +229,7 @@ class producto {
             return talle3;
         });
     }    
+    //añadir producto
     addProducto(id1,nombre1, precio1, talle1, rodado1,color1,imagen1){
         
         console.log(id1,nombre1,precio1,talle1,rodado1,color1,imagen1);
@@ -273,13 +277,13 @@ class producto {
           });
     }
     }
-
+    //color la suma total en el carrito
     getPonerTotal(){
         let total=this.getSumatorria2();
        
         totalCarrito.innerHTML=`Total=$ ${total}`;
     };
-
+    //cantidad de prouctos del carrito
     getCantidadCarrito(){
         let suma=0;
         for(let i in listaCarrito){
@@ -287,14 +291,14 @@ class producto {
         }
         return suma;
     };
-
+    //Calcular el monto total del carrito
     getSumatorria2(){
         return listaCarrito.reduce(  (acum, product) => 
         {  return acum + (product.cant * product.precio)  }, 0  )
     };
-
+    //guardar local storage
     guardarLocal =(lista)=>{localStorage.setItem('productos',JSON.stringify(lista))};
-    
+    //recuperar los datos del storage
     recuperarDatos = ()=>{
          listaCarrito =JSON.parse(localStorage.getItem('productos')
 
@@ -304,8 +308,9 @@ class producto {
     
     
        
-    
+    //Vaciar el local storage
     vaciarLocal = ()=> localStorage.clear();
+    //listar carrito de compras
     getListarCarrito(){
         
         cantidadCarrito.innerHTML=this.getCantidadCarrito();
@@ -336,7 +341,7 @@ class producto {
             
             
         };
-
+        //Vaciar carrito de compras
         vaciarCarritoCompras(){
             const vaciarCarrito = document.querySelector('#vaciar');
             vaciarCarrito.addEventListener('click', ()=>{
@@ -345,7 +350,7 @@ class producto {
                 this.getListarCarrito();
             });
         };
-
+        //Eliminar producto del carrito
         eleminarProductoCarrito(){
             const botonesEliminar = document.querySelectorAll('.btn1');
             
@@ -367,7 +372,7 @@ class producto {
             });
             
         };
-        
+    //agregar al carrito    
     agregarAlCarrito(){
         const boton = document.querySelectorAll('.btn');      
         let id2;
