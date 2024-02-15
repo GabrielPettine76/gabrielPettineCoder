@@ -6,6 +6,8 @@ const precio = document.querySelector('h4');
 const color = document.querySelector('#color');
 const contenedor = document.querySelector('.productContainer');
 const carritoCompra= document.querySelector('.carrito');
+const categorias = document.querySelector('#Categorias');
+console.log(categorias);
 const totalCarrito = document.querySelector('.total');
 const cantidadCarrito = document.querySelector('i');
 const contenedorCarrito = document.querySelector('.contenedorCarrito');
@@ -14,105 +16,14 @@ const ordernarMenor = document.querySelector('#ordenarMin');
 const ordenarMayor = document.querySelector('#ordenarMay');
 let listaCarrito=JSON.parse(localStorage.getItem('productos')) || [];
 let guardarTalle='';
+let listaProductos=[];
+let listaCategoria=[];
 
 
 
 
 //productos
-const productos = [
-    {
-        id:0,
-        imagen:"./images/descarga.jpg",
-        nombre:'Giant XTC',
-        Precio:1500000,
-        color: "#2867A6",
-        rodado:29,
-        talle:[15,17,19,21]
 
-    },
-    {
-        id:1,
-        imagen:"./images/Calea.jpg",
-        nombre:' Zenith Calea',
-        Precio:1000000,
-        color: "#A2A6AA",
-        rodado:29,
-        talle:[15,17,19,21]
-
-    },
-    {
-        id:2,
-        imagen:"./images/topMega.jpg",
-        nombre:'Top Mega Armor',
-        Precio: 500000,
-        color: "#59A8F6" ,
-        rodado:29,
-        talle:[16,18,20]
-
-    },
-    {
-        id:3,
-        imagen:"./images/scott.jpg",
-        nombre:'Scott Scale 970',
-        Precio: 2500000,
-        color: "#000000",
-        rodado:29,
-        talle:[16,18,20]
-
-    },
-    {
-        id:4,
-        imagen:"./images/trek.jpg",
-        nombre:'Treck Madone',
-        Precio: 4500000,
-        color: "#000000",
-        rodado:28,
-        talle:[50,52,54,56,58]
-
-    },
-    {
-        id:5,
-        imagen:"./images/bianchi.jpg",
-        nombre:'Bianchi Oltre xr4',
-        Precio: 4000000,
-        color: "#59A8F6",
-        rodado:28,
-        talle:[50,52,54,56,58]
-
-    },
-    {
-        id:6,
-        imagen:"./images/volta.jpg",
-        nombre:'Volta Viggo',
-        Precio: 800000,
-        color: "#F93403",
-        rodado:29,
-        talle:[16,18,20]
-
-    },
-    {
-        id:7,
-        imagen:"./images/specializad.jpg",
-        nombre:'Specializad Tarmac',
-        Precio: 4800000,
-        color: "#ffffff",
-        rodado:29,
-        talle:[50,52,54,56,58]
-
-    },
-    {
-        id:8,
-        imagen:"./images/casco.png",
-        nombre:'Casco Ruta',
-        Precio: 48000,
-        color: "#ffffff",
-        rodado:0,
-        talle:[50,52,54,56,58]
-
-    },
-    
-
-];
 
 
 class producto {
@@ -122,14 +33,47 @@ class producto {
         this.productos = productos;
         
     }
+//obtener productos del json
+    
+    obtenerPorductos = async()=>{
+        try{
+        const endPoint = 'js/data.json';
+        const respuesta = await fetch(endPoint);
+        const json = await respuesta.json();
+        const {productos, categoria} = json;
+        console.log(productos);
+        this.getListarProductos(productos);
+        this.cargarTalles(productos);
+        listaProductos=productos;
+        listaCategoria=categoria;
+        console.log(listaCategoria);
+        this.cargarCategoria(listaCategoria);
+        lista.buscar(listaProductos);
+        }
+        catch(error){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Algo esta mal. Hubo un error al Cargar los producots!",
+                footer: 'Comunica para seguir telefonicamente la compra'
+              });
+        }
+
+    }
     //funcion Buscar Por ingreso de texto
-    buscar() {
+    buscar(lista) {
+        console.log(lista);
         buscarEnElCarrito.addEventListener('input', (e) => {
-            const buscarInput = e.target.value;
+            const buscarInput = e.target.value.toLowerCase();
             console.log(buscarInput);
-            const nuevaLista = productos.filter((productos) => productos.nombre.toLowerCase().includes(buscarInput.toLowerCase()));
+    
+            const nuevaLista = lista.filter((producto) => 
+                producto.nombre.toLowerCase().includes(buscarInput)
+            );
+            
             console.log(nuevaLista);
-             this.getListarProductos(nuevaLista);
+            
+            this.getListarProductos(nuevaLista);
             this.cargarTalles(nuevaLista);
         });
     }
@@ -138,10 +82,11 @@ class producto {
         let nuevaLista;
         ordernarMenor.addEventListener('click',()=>{
             console.log(ordernarMenor);
-            console.log(productos.sort((x,y)=> x.Precio - y.Precio));
-            nuevaLista= productos.sort((x,y)=> x.Precio - y.Precio);
+            console.log(listaProductos.sort((x,y)=> x.Precio - y.Precio));
+            nuevaLista= listaProductos.sort((x,y)=> x.Precio - y.Precio);
             this.getListarProductos(nuevaLista);
             this.cargarTalles(nuevaLista);
+            this.buscar(nuevaLista);
         })
       
         
@@ -150,12 +95,28 @@ class producto {
      OrdenarPorPrecioMay(){
             let nuevaLista;
             ordenarMayor.addEventListener('click',()=>{
-            nuevaLista=productos.sort((x,y)=> y.Precio - x.Precio);
+            nuevaLista=listaProductos.sort((x,y)=> y.Precio - x.Precio);
             this.getListarProductos(nuevaLista);
             this.cargarTalles(nuevaLista);
+            this.buscar(nuevaLista);
         })
         
     }
+    //buscar por categoria
+    buscarPorCategoria = () => {
+        categorias.addEventListener('change', (e) => {
+            console.log(categorias.value);
+            let nuevaLista = listaProductos.filter((producto) =>
+                producto.categoria_id == categorias.value
+            );
+            console.table(nuevaLista);
+            this.getListarProductos(nuevaLista);
+            this.cargarTalles(nuevaLista);
+            this.buscar(nuevaLista);
+        });
+    }
+    
+
     //listar los productos que estan a la venta
     getListarProductos(product){
         contenedor.innerHTML='';
@@ -186,8 +147,20 @@ class producto {
        
         this.agregarAlCarrito();
         this.seleccionarTalles();
+        this.buscar(listaProductos);
         
-    } 
+    }
+    //cargar categoria
+    cargarCategoria = (lista) =>{
+        console.log(lista);
+        lista.forEach(element => {
+            categorias.innerHTML+=`<option id="#${element.id}"value=${element.id}>${element.nombre}</option>`;
+        });
+        
+        
+    }
+    
+    
     //cargar los talles de los productos en los selects
     cargarTalles(productos) {
         console.log(productos);
@@ -210,7 +183,7 @@ class producto {
     //Buscar un producto por id
     getProductos(id){
        
-        const buscar = productos.find( item => item.id == id);
+        const buscar = listaProductos.find( item => item.id == id);
         return buscar ? buscar : 'no existe el producto';
     }
     
@@ -265,8 +238,9 @@ class producto {
                 listaCarrito[indice].talle.push(this.seleccionarTalles());
            }
         this.guardarLocal(listaCarrito);
+        location.reload();
         this.getListarCarrito();
-        this.getPonerTotal();
+        
     }
     else{
         Swal.fire({
@@ -277,12 +251,7 @@ class producto {
           });
     }
     }
-    //color la suma total en el carrito
-    getPonerTotal(){
-        let total=this.getSumatorria2();
-       
-        totalCarrito.innerHTML=`Total=$ ${total}`;
-    };
+   
     //cantidad de prouctos del carrito
     getCantidadCarrito(){
         let suma=0;
@@ -314,64 +283,15 @@ class producto {
     getListarCarrito(){
         
         cantidadCarrito.innerHTML=this.getCantidadCarrito();
-        carritoCompra.innerHTML=`
         
-        <div class="tituloCarrito">
-            <h4>Nombre</h4><h4>Cantidad</h4><h4>Precio Unitario</h4><h4>Precio total</h4>
-            </div>
-        `;
-        listaCarrito.forEach(element => {
-            
-            
-            carritoCompra.innerHTML +=
-            `
-           
-            <div class="carritoEnProducto" }>
-                <h4>${element.nombre}
-                <button class='btn1' id=${element.id}><i class='bx bxs-trash'></i></button></h4>
-                <h4>${element.cant}</h4>
-                <h4>$${element.precio}</h4>
-                <h4>$${element.precio*element.cant}</h4>
-                
-
-            </div>`; 
-            });  
-            this.getPonerTotal();
-            this.eleminarProductoCarrito();
             
             
         };
-        //Vaciar carrito de compras
-        vaciarCarritoCompras(){
-            const vaciarCarrito = document.querySelector('#vaciar');
-            vaciarCarrito.addEventListener('click', ()=>{
-                listaCarrito=[];
-                localStorage.clear();
-                this.getListarCarrito();
-            });
-        };
-        //Eliminar producto del carrito
-        eleminarProductoCarrito(){
-            const botonesEliminar = document.querySelectorAll('.btn1');
-            
-            botonesEliminar.forEach((btn)=>{
-                
-                btn.addEventListener('click',function(){
-                const idProducto = parseInt(btn.id);
-               
-                localStorage.clear();
-                listaCarrito = listaCarrito.filter(productos => productos.id !== idProducto);
-                localStorage.setItem('productos', JSON.stringify(listaCarrito));
-                
-                location.reload();
-                
-                
-               });
+        
                
                 
-            });
-            
-        };
+        
+        
     //agregar al carrito    
     agregarAlCarrito(){
         const boton = document.querySelectorAll('.btn');      
@@ -397,20 +317,22 @@ class producto {
 
 
 const lista = new producto;
-
-lista.getListarProductos(productos);
-lista.buscar();
+lista.obtenerPorductos();
 lista.recuperarDatos();
-lista.cargarTalles(productos);
-//lista.seleccionarTalles();
+
+lista.buscarPorCategoria();
+
+
+
 
 if(listaCarrito){
     lista.getListarCarrito();
     
 }
-lista.vaciarCarritoCompras();
+
 lista.OrdenarPorPrecioMin();
 lista.OrdenarPorPrecioMay();
+
 
 
 

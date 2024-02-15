@@ -1,0 +1,144 @@
+ {
+ "productos": [
+    {
+        "id":0,
+        "imagen":"./images/descarga.jpg",
+        "nombre":"Giant XTC",
+        "Precio":1500000,
+        "color": "#2867A6",
+        "rodado":29,
+        "talle":[15,17,19,21],
+        "categoria_id":1
+
+    },
+    {
+        "id":1,
+        "imagen":"./images/Calea.jpg",
+        "nombre":" Zenith Calea",
+        "Precio":1000000,
+        "color": "#A2A6AA",
+        "rodado":29,
+        "talle":[15,17,19,21],
+        "categoria_id":1
+
+    },
+    {
+        "id":2,
+        "imagen":"./images/topMega.jpg",
+        "nombre":"Top Mega Armor",
+        "Precio": 500000,
+        "color": "#59A8F6" ,
+        "rodado":29,
+        "talle":[16,18,20],
+        "categoria_id":1
+
+    },
+    {
+        "id":3,
+        "imagen":"./images/scott.jpg",
+        "nombre":"Scott Scale 970",
+        "Precio": 2500000,
+        "color": "#000000",
+        "rodado":29,
+        "talle":[16,18,20],
+        "categoria_id":1
+
+    },
+    {
+        "id":4,
+        "imagen":"./images/trek.jpg",
+        "nombre":"Treck Madone",
+        "Precio": 4500000,
+        "color": "#000000",
+        "rodado":28,
+        "talle":[50,52,54,56,58],
+        "categoria_id":1
+
+    },
+    {
+        "id":5,
+        "imagen":"./images/bianchi.jpg",
+        "nombre":"Bianchi Oltre xr4",
+        "Precio": 4000000,
+        "color": "#59A8F6",
+        "rodado":28,
+        "talle":[50,52,54,56,58],
+        "categoria_id":1
+
+    },
+    {
+        "id":6,
+        "imagen":"./images/volta.jpg",
+        "nombre":"Volta Viggo",
+        "Precio": 800000,
+        "color": "#F93403",
+        "rodado":29,
+        "talle":[16,18,20],
+        "categoria_id":1
+
+    },
+    {
+        "id":7,
+        "imagen":"./images/specializad.jpg",
+        "nombre":"Specializad Tarmac",
+        "Precio": 4800000,
+        "color": "#ffffff",
+        "rodado":29,
+        "talle":[50,52,54,56,58],
+        "categoria_id":1
+    },
+    {
+        "id":8,
+        "imagen":"./images/casco.png",
+        "nombre":"Casco Ruta",
+        "Precio": 48000,
+        "color": "#ffffff",
+        "rodado":0,
+        "talle":[50,52,54,56,58],
+        "categoria_id":2
+
+    },
+    {
+        "id":9,
+        "imagen":"./images/Blitz.png",
+        "nombre":"Motomel blitz",
+        "Precio": 950000,
+        "color": "#ffffff",
+        "rodado":0,
+        "talle":["unico"],
+        "categoria_id":3
+
+    },
+    {
+        "id":10,
+        "imagen":"./images/siam.jpg",
+        "nombre":"Siam Trender",
+        "Precio": 1005000,
+        "color": "#ffffff",
+        "rodado":0,
+        "talle":["SinTalle"],
+        "categoria_id":3
+
+    },
+    {
+        "id":11,
+        "imagen":"./images/CascoCafeRacer.jpg",
+        "nombre":"Casco Caferacer",
+        "Precio": 67000,
+        "color": "#ffffff",
+        "rodado":0,
+        "talle":["unico"],
+        "categoria_id":2
+
+    }
+    
+
+],
+"categoria":[
+    {"id":1, "nombre":"bicicletas"},
+    {"id":2, "nombre":"accesorios"},
+    {"id":3, "nombre":"motos"}
+]
+
+
+}

@@ -31,6 +31,8 @@ h1{
   }
   
 }
+
+
 //productos escritorio
 .producto {
 	display: flex;
@@ -109,6 +111,13 @@ h1{
  margin:10px;
   text-align: center;
 }
+.contPro{
+  margin-top: 10px;
+  z-index: 10;
+}
+.titulo{
+  margin-top: 25px;
+}
 .tituloCarrito {
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -120,6 +129,13 @@ h1{
   }
 }
 .contCarrito{
+  text-align: center;
+  font-size: 1.2rem;
+ 
+}
+.contCart{
+  z-index: 100;
+  margin-top:11rem;
   text-align: center;
   font-size: 1.2rem;
 }
@@ -162,18 +178,59 @@ h1{
     border: 2px solid black;
   }
 }
+#Categorias{
+  background-color: #ffffff;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  width: 200px;
+  outline: none;
+  cursor: pointer;
+  &::after {
+    content: '\25BC'; 
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+  }
+  &:focus{border-color: #2ecc71;
+  box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+  }
+}
+#buscar{
+  padding: 10px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      width: 300px;
+      transition: border-color 0.3s ease;
+      &:focus{
+        border-color: #2ecc71;
+      }
+}
 .ordenar{
   margin:0 5px;
+  background-color: $color_promo;
+
   i{
-    padding: 0 10px;
-    font-size: 1.2rem;
+   
+    font-size: 1.5rem;
     color:white; 
-    background-color: $color_promo; 
+    background-color: $color_promo;
+    &:hover{
+      background-color: white;
+      color:$color_promo;
+    } 
   }
   &:hover{
     cursor: pointer;
     background-color: white;
     color:$color_promo;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px $color_promo;
   }
   
 }

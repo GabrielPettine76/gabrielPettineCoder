@@ -28,7 +28,7 @@
 <body>
     <header>
         <div class="promo">
-            <h3>Descuento 10% en efectivo <i class='bx bx-cart'></i><p id="cantCarrito"></p></h3>
+            <h3>Descuento 10% en efectivo <a href="./carrito.html"><i class='bx bx-cart'></i></a><p id="cantCarrito"></p></h3>
         </div>
         <nav>
             <input type="checkbox" id="checkBtn">
@@ -46,27 +46,23 @@
         </nav>
     </header>
     <main>
+        <div class="contPro">
         <div class="titulo">
             <h1 class="tituloSuc">productos</h1>
         </div>
         <div class="contCarrito">
-            <div class="TituloCar">Carrito de Compras</div>
-                <div class="carrito">
-
-                </div>
-                <div class="total">Total: $0</div>
-                <p><button id='vaciar'>Vaciar</button></p>
-            </div>
+            
             <div class="buscarCarrito">
                 <button id="ordenarMay"class='ordenar'><i class='bx bx-upvote'></i></button>
                 <input id="buscar" placeholder="Buscar tu producto">
                 <button id="ordenarMin"class='ordenar'><i class='bx bx-downvote'></i></button>
+                <select id="Categorias"></select>
             </div>
         </div>
         <div class="productContainer">
 
         </div>
-
+    </div>
 
 
     </main>

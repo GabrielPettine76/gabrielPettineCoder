@@ -8,6 +8,7 @@
     encuentra las mejores marcas y productos para tu bicicleta en nuestra tienda de bicicletería.">
     <meta name="keywords" content="bicicletería, bicicleta, Olivos, Mar del Plata, 
     Monte Grande, Centro,accesorios, reparaciones">
+    <script src="/js/carrito.js" defer></script>
     <link rel="shortcut icon" href="images/biciLogo.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -17,7 +18,7 @@
 <body>
     <header>
         <div class="promo">
-            <h3>Descuento 10% en efectivo</h3><i class='bx bx-cart'></i>
+            <h3>Descuento 10% en efectivo</h3>
         </div>
         <nav>
             <input type="checkbox" id="checkBtn">
@@ -26,18 +27,24 @@
             </label>
                 <img src="./images/biciLogo.png" alt="logo" class="logo">
                  <ul>
-                     <li><a href="index.html">Inicio</a></li>
-                    <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
                         <li><a href="productos.html">Productos</a></li>
                         <li><a href="sucursales.html">Sucursales</a></li>
-                     <li><a href="contacto.html">Contacto</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <div class="listaDeCarrito">
-            <button onclick="carrito.getListarCarrito()">AGREGAR</button>
-            <h1>HOLA MUNDO</h1>
+        <div class="contCart">
+            <div class="TituloCar">Carrito de Compras</div>
+                <div class="listaDeCarrito">
+
+                </div>
+                <div class="total">Total: $0</div>
+                <p><button id='vaciar'>Vaciar</button></p>
+            </div>
+            
         </div>
         
     </main>
@@ -59,6 +66,6 @@
         <div class="linea"></div>
         <div class="copiright">2023 copiright <a href="https://gabrielpettine76.github.io/4gstudio/index.html#" target="_blank">4gstudio</a></div>
     </footer>
-    <script src="./js/productos.js"></script>
+    
 </body>
 </html>
